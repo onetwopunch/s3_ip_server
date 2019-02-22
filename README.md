@@ -15,20 +15,21 @@ Environment varables:
 
 
 ```
-
 #!/bin/bash
 
 # Install Golang
+sudo yum install -y git
 export ARTIFACT=go1.11.5.linux-amd64.tar.gz
 curl -o /tmp/$ARTIFACT "https://dl.google.com/go/$ARTIFACT"
-tar -C /usr/local -xzf $ARTIFACT
-GOPATH=/opt
+tar -C /usr/local -xzf /tmp/$ARTIFACT
+export GOPATH=/opt
+export PATH=/usr/local/go/bin:$PATH
 
 # Install our server
-go get github.com/onetwopunch
+go get github.com/onetwopunch/s3_ip_server
 
 # Create a systemd service to get it to run in the background
-cat << 'SVC' > /etc/systemd/system/dpg.service
+cat << 'SVC' > /etc/systemd/system/lab.service
 [Unit]
 Description=Distributed Password Guessing Scenario
 After=network.target
@@ -51,9 +52,4 @@ Environment=AWS_OBJECT=[edit me]
 WantedBy=multi-user.target
 
 SVC
-
-systemctl daemon-reload
-systemctl start dpg
-
-
 ```

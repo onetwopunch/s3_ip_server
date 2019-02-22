@@ -16,6 +16,14 @@ import (
   "strings"
   "bufio"
 )
+const tmpl = `
+<html><body>
+<h1>Bad Ips</h1>
+<ul>
+  {{ range . }}
+    <li>{{ . }}</li>
+  {{ end }}
+</ul></body></html>`
 
 func getIpsFromS3(bucket, object string) ([]string, error) {
 	// Original list from https://www.dshield.org/ipsascii.html?limit=100
@@ -56,7 +64,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
   if err != nil {
     log.Fatal(err)
   }
-	t := template.Must(template.New("index.html").ParseFiles("index.html"))
+	t := template.Must(template.New("index.html").Parse(tmpl))
 	fmt.Println(ips)
 	t.Execute(w, ips)
 }
