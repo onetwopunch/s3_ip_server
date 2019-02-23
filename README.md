@@ -39,8 +39,6 @@ Type=simple
 User=ec2-user
 ExecStart=/opt/bin/s3_ip_server
 Restart=on-failure
-Environment=PATH=$PATH:/usr/local/go/bin
-Environment=GOPATH=/opt
 
 ## EDIT THESE ##
 Environment=AWS_REGION=[edit me]
@@ -53,3 +51,6 @@ WantedBy=multi-user.target
 
 SVC
 ```
+
+systemctl daemon-reload
+systemctl start lab
