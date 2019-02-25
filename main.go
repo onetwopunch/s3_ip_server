@@ -89,6 +89,6 @@ func GetSession() *session.Session {
 }
 
 func main() {
-	http.HandleFunc("/ip", indexHandler)
+	http.HandleFunc("/", indexHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
