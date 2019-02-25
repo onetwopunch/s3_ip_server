@@ -48,9 +48,8 @@ Environment=AWS_OBJECT=[edit me]
 
 [Install]
 WantedBy=multi-user.target
-
 SVC
-```
 
 systemctl daemon-reload
 systemctl start lab
+```
